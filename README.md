@@ -1,5 +1,8 @@
-CIS4340 Virtual Pet (Mobile Application Development Project)
+ Virtual Pet 
 ==============================================
+
+CIS4340 Mobile Application Development Project
+----------------------------------------------
 
 - Matthew Findlater
 - Bahaa Kutub
