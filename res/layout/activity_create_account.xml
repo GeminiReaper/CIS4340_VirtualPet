@@ -14,7 +14,7 @@
                         android:layout_below="@+id/txtEmail"
                         android:layout_marginTop="32dp"
                         android:text="@string/Password"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -25,7 +25,7 @@
                         android:layout_below="@+id/txtUsername"
                         android:layout_marginTop="28dp"
                         android:text="@string/Email"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         tools:ignore="HardcodedText" />
 
                     <EditText
@@ -47,7 +47,7 @@
                         android:layout_alignBottom="@+id/lblEmail"
                         android:layout_alignLeft="@+id/txtUsername"
                         android:ems="10"
-						android:inputType="text" />
+						android:inputType="textEmail" />
                     
                     <TextView
                         android:id="@+id/lblUsername"
@@ -58,7 +58,7 @@
                         android:layout_marginLeft="108dp"
                         android:layout_marginTop="79dp"
                         android:text="@string/Username"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         tools:ignore="HardcodedText" />
 
                     <EditText

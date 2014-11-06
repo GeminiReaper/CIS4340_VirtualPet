@@ -46,7 +46,7 @@
                         android:layout_alignBottom="@+id/lblEmail"
                         android:layout_alignLeft="@+id/txtUsername"
                         android:ems="10"
-						android:inputType="text" />
+						android:inputType="textEmail" />
                     
                     <TextView
                         android:id="@+id/lblUsername"
