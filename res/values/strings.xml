@@ -14,5 +14,8 @@
         
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="title_activity_login">LoginActivity</string>
-
+    
+    <string name="btnCreateAccountAsk">Create Account?</string>
+    <string name="btnLoginAsk">Login?</string>
+    
 </resources>

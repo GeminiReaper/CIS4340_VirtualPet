@@ -80,5 +80,15 @@
                         android:layout_toRightOf="@+id/lblPassword"
                         android:drawableLeft="@drawable/ic_add_person_50"
                         android:text="@string/btnCreateAccount" />
+
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/btnCreateAccount"
+                        android:layout_alignRight="@+id/btnCreateAccount"
+                        android:layout_below="@+id/btnCreateAccount"
+                        android:layout_marginTop="31dp"
+                        android:text="@string/btnLoginAsk" />
   
 </RelativeLayout>
