@@ -9,6 +9,9 @@
     <string name="Email">Email</string>
     <string name="Password">Password</string>
     <string name="btnLogin">Login</string>
+        <string name="btnDeleteAccount">Delete Account</string>
+        <string name="btnUpdateAccount">Update Account</string>
+        
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="title_activity_login">LoginActivity</string>
 

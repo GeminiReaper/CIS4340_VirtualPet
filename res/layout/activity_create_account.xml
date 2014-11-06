@@ -6,7 +6,7 @@
 
     
     
-    <TextView
+     <TextView
                         android:id="@+id/lblPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
                         android:layout_below="@+id/txtEmail"
                         android:layout_marginTop="32dp"
                         android:text="@string/Password"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -25,7 +25,7 @@
                         android:layout_below="@+id/txtUsername"
                         android:layout_marginTop="28dp"
                         android:text="@string/Email"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         tools:ignore="HardcodedText" />
 
                     <EditText
@@ -47,8 +47,8 @@
                         android:layout_alignBottom="@+id/lblEmail"
                         android:layout_alignLeft="@+id/txtUsername"
                         android:ems="10"
-                        android:inputType="textEmail" />
-
+						android:inputType="textEmail" />
+                    
                     <TextView
                         android:id="@+id/lblUsername"
                         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
                         android:layout_marginLeft="108dp"
                         android:layout_marginTop="79dp"
                         android:text="@string/Username"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         tools:ignore="HardcodedText" />
 
                     <EditText
@@ -78,6 +78,7 @@
                         android:layout_below="@+id/txtPassword"
                         android:layout_marginTop="39dp"
                         android:layout_toRightOf="@+id/lblPassword"
+                        android:drawableLeft="@drawable/ic_add_person_50"
                         android:text="@string/btnCreateAccount" />
   
 </RelativeLayout>
