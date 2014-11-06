@@ -11,7 +11,5 @@
     <string name="btnLogin">Login</string>
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="btnUpdateAccount">Update Account</string>
-    <string name="btnDeleteAccount">Delete Account</string>
-    
+
 </resources>
