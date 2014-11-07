@@ -3,7 +3,7 @@
 
     <string name="app_name">VirtualPet</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_manage_account">ManageAccountActivity</string>
+    <string name="title_activity_manage_account">Manage Account</string>
     <string name="btnCreateAccount">Create Account</string>
     <string name="Username">Username</string>
     <string name="Email">Email</string>
@@ -12,8 +12,8 @@
         <string name="btnDeleteAccount">Delete Account</string>
         <string name="btnUpdateAccount">Update Account</string>
         
-    <string name="title_activity_create_account">CreateAccountActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_create_account">Create Account</string>
+    <string name="title_activity_login">Login</string>
     
     <string name="btnCreateAccountAsk">Create Account?</string>
     <string name="btnLoginAsk">Login?</string>
