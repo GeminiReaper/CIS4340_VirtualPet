@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +36,15 @@ public class CreateAccountActivity extends Activity {
 	EditText username;
 	EditText password;
 	EditText email;
+	
+	private Handler toastHandler = new Handler(new Handler.Callback(){
+		@Override
+		public boolean handleMessage(Message message){
+			Toast toast = Toast.makeText(CreateAccountActivity.this, (String)message.obj, Toast.LENGTH_LONG);
+			toast.show();
+			return false;
+		}
+	});
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +68,7 @@ public class CreateAccountActivity extends Activity {
 						if (Utility.isNetworkAvailable(CreateAccountActivity.this)){
 						    // Create a new HttpClient and Post Header
 						    HttpClient httpclient = new DefaultHttpClient();
-						    HttpPost httppost = new HttpPost("cis-linux2.temple.edu/~tuc28686/virtualpet/create_user.php");
+						    HttpPost httppost = new HttpPost("http://cis-linux2.temple.edu/~tuc28686/virtualpet/create_user.php");
 
 						    try {
 						    	
@@ -89,8 +100,15 @@ public class CreateAccountActivity extends Activity {
 										
 									}
 									else{
-										Toast toast = Toast.makeText(CreateAccountActivity.this, result + ": " + message, Toast.LENGTH_SHORT);
-										toast.show();
+										
+										if (message.startsWith("SQLSTATE[23000]:"))
+												{
+											message = "Username already exists";
+												}
+										Message resultMessage = Message.obtain();
+										resultMessage.obj = result + ": " + message;
+										toastHandler.sendMessage(resultMessage);
+										
 									}
 									
 								} catch (JSONException e) {
@@ -98,26 +116,22 @@ public class CreateAccountActivity extends Activity {
 									e.printStackTrace();
 								}
 								
-								
-								
+
 						        
 						    } catch (ClientProtocolException e) {
 						        // TODO Auto-generated catch block
 						    } catch (IOException e) {
 						        // TODO Auto-generated catch block
 						    }
-							
-							
-							
-							
+
 							
 						}
 						
 						else{
-							
-							Toast toast = Toast.makeText(CreateAccountActivity.this, "No Network Connection", Toast.LENGTH_SHORT);
-							toast.show();
-						}					
+							Message message = Message.obtain();
+							message.obj = "No Network Connection";
+							toastHandler.sendMessage(message);
+					}					
 					}
 				};
 				
