@@ -1,0 +1,58 @@
+
+
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    
+
+
+    
+    <TextView
+        android:id="@+id/txtPetNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtDescription"
+        android:layout_below="@+id/txtPetName"
+        android:layout_marginTop="20dp"
+        android:text="[Pet Nickname]"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imgPet"
+        android:layout_below="@+id/imgPet"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="66dp"
+        android:text="[Pet Description]"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/txtPetName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/txtPetNickname"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="178dp"
+        android:text="[Pet Name]"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/imgPet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtPetNickname"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/test_owl" 
+        android:contentDescription="no"/>
+
+</RelativeLayout>

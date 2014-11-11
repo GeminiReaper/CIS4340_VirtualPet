@@ -97,7 +97,6 @@ public class CreateAccountActivity extends Activity {
 										//intent.putExtra(name, value);
 										startActivity(intent);
 										
-										
 									}
 									else{
 										
