@@ -10,11 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class PetActivity extends Activity {
 	Button btnPet;
 	Button btnManageAccount;
 	Button btnInventory;
+	TextView txtPetNickname;
 	
 	
 	@Override
@@ -25,10 +27,22 @@ public class PetActivity extends Activity {
 		btnPet = (Button)findViewById(R.id.btnPet);
 		btnManageAccount = (Button)findViewById(R.id.btnManageAccount);
 		btnInventory = (Button)findViewById(R.id.btnInventory);
+		txtPetNickname = (TextView)findViewById(R.id.txtPetNickname);
  
 
 	
-	
+		txtPetNickname.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(PetActivity.this, NicknameActivity.class);
+				startActivity(intent);
+			
+			
+			}
+		});
+		
+		
 	btnPet.setOnClickListener(new View.OnClickListener() {
 		
 		@Override
