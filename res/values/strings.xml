@@ -8,6 +8,7 @@
     <string name="Username">Username</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>
+    <string name="RepeatPassword">Repeat Password</string>
     <string name="btnLogin">Login</string>
     <string name="btnDeleteAccount">Delete Account</string>
     <string name="btnUpdateAccount">Update Account</string>
