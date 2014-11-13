@@ -103,9 +103,11 @@ public class LoginActivity extends Activity {
 										Message loginMessage = Message.obtain();
 										loginMessage.obj = "Login Successful!";
 										toastHandler.sendMessage(loginMessage);
-										//Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-										//intent.putExtra(name, value);
-										//startActivity(intent);
+										Intent intent = new Intent(LoginActivity.this, PetActivity.class);
+										intent.putExtra(Constants.USERNAME, strUsername);
+										intent.putExtra(Constants.EMAIL, email);
+										intent.putExtra(Constants.USER_ID, userID);
+										startActivity(intent);
 										
 										
 									}
