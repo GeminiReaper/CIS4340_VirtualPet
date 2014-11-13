@@ -17,5 +17,9 @@
     <string name="btnLoginAsk">Login?</string>
     <string name="title_activity_pet">PetActivity</string>
     <string name="title_activity_inventory">InventoryActivity</string>
+    <string name="btnManageAccount">Manage Account</string>
+	<string name="btnPet">Pet</string>     
+    <string name="btnInventory">Inventory</string>
+                
 
 </resources>
