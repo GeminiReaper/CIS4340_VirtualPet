@@ -18,4 +18,10 @@
     <string name="title_activity_pet">PetActivity</string>
     <string name="title_activity_inventory">InventoryActivity</string>
 
+    <string name="btnInventory">Inventory</string>
+        <string name="btnPet">Pet</string>
+        <string name="btnManageAccount">Manage Account</string>
+        
+<string name="title_activity_inventory">InventoryActivity</string>
+
 </resources>
