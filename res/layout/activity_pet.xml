@@ -20,6 +20,8 @@
         android:layout_below="@+id/txtPetName"
         android:layout_marginTop="20dp"
         android:text="[Pet Nickname]"
+        android:onClick="onClick"
+		android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
