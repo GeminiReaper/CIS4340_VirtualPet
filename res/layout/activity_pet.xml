@@ -53,6 +53,34 @@
         android:layout_marginLeft="175dp"
         android:layout_marginTop="68dp"
         android:src="@drawable/test_owl" 
-        android:contentDescription="no"/>
+        android:contentDescription="image not found"/>
+
+            <Button
+                android:id="@+id/btnManageAccount"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btnInventory"
+                android:layout_alignParentTop="true"
+                android:drawableLeft="@drawable/ic_action_person" 
+                android:text="@string/btnManageAccount" />
+
+            <Button
+                android:id="@+id/btnPet"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btnManageAccount"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:drawableLeft="@drawable/ic_action_favorite"
+                android:text="@string/btnPet"  />
+
+            <Button
+                android:id="@+id/btnInventory"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:drawableLeft="@drawable/ic_action_view_as_grid" 
+                android:text="@string/btnInventory" />
 
 </RelativeLayout>

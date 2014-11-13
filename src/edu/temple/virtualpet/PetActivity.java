@@ -9,9 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class PetActivity extends Activity {
-	
-	
-    
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
