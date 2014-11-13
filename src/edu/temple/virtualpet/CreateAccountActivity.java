@@ -36,6 +36,7 @@ public class CreateAccountActivity extends Activity {
 	EditText username;
 	EditText password;
 	EditText email;
+	EditText passwordRepeat;
 
 	private Handler toastHandler = new Handler(new Handler.Callback() {
 		@Override
@@ -57,7 +58,7 @@ public class CreateAccountActivity extends Activity {
 		username = (EditText) findViewById(R.id.txtUsername);
 		password = (EditText) findViewById(R.id.txtPassword);
 		email = (EditText) findViewById(R.id.txtEmail);
-
+		passwordRepeat = (EditText) findViewById(R.id.txtPasswordRepeat);
 		btnCreateAccount.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -74,6 +75,9 @@ public class CreateAccountActivity extends Activity {
 									"http://cis-linux2.temple.edu/~tuc28686/virtualpet/create_user.php");
 							if (!username.getText().toString().isEmpty()
 									|| !password.getText().toString().isEmpty()) {
+								if(passwordRepeat.getText().toString()
+										.equals(password.getText().toString())) {
+
 
 								try {
 
@@ -142,16 +146,21 @@ public class CreateAccountActivity extends Activity {
 									// TODO Auto-generated catch block
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
-								}
+								}}
 
-							}
+								else {
+									Message message = Message.obtain();
+									message.obj = "Passwords do not match, please try again !";
+									toastHandler.sendMessage(message);}
+								}
 							else{
 								Message message = Message.obtain();
 								message.obj = "Username and Password Cannot be empty";
 								toastHandler.sendMessage(message);
 								
 							}
-						}
+							}
+							
 
 						else {
 							Message message = Message.obtain();
