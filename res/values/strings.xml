@@ -16,7 +16,6 @@
     <string name="btnCreateAccountAsk">Create Account?</string>
     <string name="btnLoginAsk">Login?</string>
     <string name="title_activity_pet">PetActivity</string>
-    <string name="title_activity_inventory">InventoryActivity</string>
 
     <string name="btnInventory">Inventory</string>
         <string name="btnPet">Pet</string>
