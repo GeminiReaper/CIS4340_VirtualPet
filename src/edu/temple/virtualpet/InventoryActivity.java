@@ -18,18 +18,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class InventoryActivity extends Activity {
 
+	Button btnPet;
+	Button btnManageAccount;
+	Button btnInventory;
+	
 	private List<Item> items = new ArrayList<Item>();
 	private Handler handler = new Handler(new Handler.Callback() {
 		@Override
@@ -45,6 +51,51 @@ public class InventoryActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_inventory);
 		fetchInventory();
+		
+		btnPet = (Button)findViewById(R.id.btnPet);
+		btnManageAccount = (Button)findViewById(R.id.btnManageAccount);
+		btnInventory = (Button)findViewById(R.id.btnInventory);
+ 
+
+	
+	
+	btnPet.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent(InventoryActivity.this, PetActivity.class);
+			startActivity(intent);
+		
+		
+		}
+	});
+	
+	
+	btnManageAccount.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent(InventoryActivity.this, ManageAccountActivity.class);
+			startActivity(intent);
+		
+		
+		}
+	});
+	
+	btnInventory.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent(InventoryActivity.this, InventoryActivity.class);
+			startActivity(intent);
+		
+		
+		}
+	});
+	
+		
+		
+		
 	}
 
 	private void populateInventoryListView() {
