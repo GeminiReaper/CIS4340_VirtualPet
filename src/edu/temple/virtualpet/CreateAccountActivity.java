@@ -30,17 +30,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CreateAccountActivity extends Activity {
-	
+
 	Button btnLoginAsk;
 	Button btnCreateAccount;
 	EditText username;
 	EditText password;
 	EditText email;
-	
-	private Handler toastHandler = new Handler(new Handler.Callback(){
+	EditText passwordRepeat;
+
+	private Handler toastHandler = new Handler(new Handler.Callback() {
 		@Override
-		public boolean handleMessage(Message message){
-			Toast toast = Toast.makeText(CreateAccountActivity.this, (String)message.obj, Toast.LENGTH_LONG);
+		public boolean handleMessage(Message message) {
+			Toast toast = Toast.makeText(CreateAccountActivity.this,
+					(String) message.obj, Toast.LENGTH_LONG);
 			toast.show();
 			return false;
 		}
@@ -50,104 +52,138 @@ public class CreateAccountActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_account);
-		
-		btnLoginAsk = (Button)findViewById(R.id.btnLoginAsk);
+
+		btnLoginAsk = (Button) findViewById(R.id.btnLoginAsk);
 		btnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
-		username = (EditText)findViewById(R.id.txtUsername);
-		password = (EditText)findViewById(R.id.txtPassword);
-		email = (EditText)findViewById(R.id.txtEmail);
-		
+		username = (EditText) findViewById(R.id.txtUsername);
+		password = (EditText) findViewById(R.id.txtPassword);
+		email = (EditText) findViewById(R.id.txtEmail);
+		passwordRepeat = (EditText) findViewById(R.id.txtPasswordRepeat);
 		btnCreateAccount.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-			Thread thread = new Thread(){
+
+				Thread thread = new Thread() {
 					@Override
-					public void run(){
-						if (Utility.isNetworkAvailable(CreateAccountActivity.this)){
-						    // Create a new HttpClient and Post Header
-						    HttpClient httpclient = new DefaultHttpClient();
-						    HttpPost httppost = new HttpPost("http://cis-linux2.temple.edu/~tuc28686/virtualpet/create_user.php");
+					public void run() {
+						if (Utility
+								.isNetworkAvailable(CreateAccountActivity.this)) {
+							// Create a new HttpClient and Post Header
+							HttpClient httpclient = new DefaultHttpClient();
+							HttpPost httppost = new HttpPost(
+									"http://cis-linux2.temple.edu/~tuc28686/virtualpet/create_user.php");
+							if (!username.getText().toString().isEmpty()
+									|| !password.getText().toString().isEmpty()) {
+								if(passwordRepeat.getText().toString()
+										.equals(password.getText().toString())) {
 
-						    try {
-						    	
-						 // Add your data
-						        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-						        nameValuePairs.add(new BasicNameValuePair("username", username.getText().toString()));
-						        nameValuePairs.add(new BasicNameValuePair("password", password.getText().toString()));
-						        nameValuePairs.add(new BasicNameValuePair("email", email.getText().toString()));
-						        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-						        // Execute HTTP Post Request
-						        HttpResponse response = httpclient.execute(httppost);
-						        
-						        String responseJSON = EntityUtils.toString(response.getEntity());
-						        
-						        JSONObject jObject;
-						        
 								try {
-									jObject = new JSONObject(responseJSON);
-									String result = jObject.getString("result");
-									String message = jObject.getString("message");
-		
-									if (result.equals("success")){
-										
-										Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-										//intent.putExtra(name, value);
-										startActivity(intent);
-										
+
+									// Add your data
+
+									List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
+											2);
+									nameValuePairs.add(new BasicNameValuePair(
+											"username", username.getText()
+													.toString()));
+									nameValuePairs.add(new BasicNameValuePair(
+											"password", password.getText()
+													.toString()));
+									nameValuePairs
+											.add(new BasicNameValuePair(
+													"email", email.getText()
+															.toString()));
+									httppost.setEntity(new UrlEncodedFormEntity(
+											nameValuePairs));
+
+									// Execute HTTP Post Request
+									HttpResponse response = httpclient
+											.execute(httppost);
+
+									String responseJSON = EntityUtils
+											.toString(response.getEntity());
+
+									JSONObject jObject;
+
+									try {
+										jObject = new JSONObject(responseJSON);
+										String result = jObject
+												.getString("result");
+										String message = jObject
+												.getString("message");
+
+										if (result.equals("success")) {
+
+											Intent intent = new Intent(
+													CreateAccountActivity.this,
+													LoginActivity.class);
+											// intent.putExtra(name, value);
+											startActivity(intent);
+
+										} else {
+
+											if (message
+													.startsWith("SQLSTATE[23000]:")) {
+												message = "Username already exists";
+											}
+											Message resultMessage = Message
+													.obtain();
+											resultMessage.obj = result + ": "
+													+ message;
+											toastHandler
+													.sendMessage(resultMessage);
+
+										}
+
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
 									}
-									else{
-										
-										if (message.startsWith("SQLSTATE[23000]:"))
-												{
-											message = "Username already exists";
-												}
-										Message resultMessage = Message.obtain();
-										resultMessage.obj = result + ": " + message;
-										toastHandler.sendMessage(resultMessage);
-										
-									}
-									
-								} catch (JSONException e) {
+
+								} catch (ClientProtocolException e) {
 									// TODO Auto-generated catch block
-									e.printStackTrace();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+								}}
+
+								else {
+									Message message = Message.obtain();
+									message.obj = "Passwords do not match, please try again !";
+									toastHandler.sendMessage(message);}
 								}
+							else{
+								Message message = Message.obtain();
+								message.obj = "Username and Password Cannot be empty";
+								toastHandler.sendMessage(message);
 								
-
-						        
-						    } catch (ClientProtocolException e) {
-						        // TODO Auto-generated catch block
-						    } catch (IOException e) {
-						        // TODO Auto-generated catch block
-						    }
-
+							}
+							}
 							
-						}
-						
-						else{
+
+						else {
 							Message message = Message.obtain();
 							message.obj = "No Network Connection";
 							toastHandler.sendMessage(message);
-					}					
+						}
 					}
+
 				};
-				
+
 				thread.start();
-				
-				
+
 			};
 		});
-		
+
 		btnLoginAsk.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
+				Intent intent = new Intent(CreateAccountActivity.this,
+						LoginActivity.class);
 				startActivity(intent);
-			
-			
+
 			}
 		});
 	}

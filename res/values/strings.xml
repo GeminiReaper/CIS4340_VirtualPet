@@ -8,6 +8,7 @@
     <string name="Username">Username</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>
+    <string name="RepeatPassword">Repeat Password</string>
     <string name="btnLogin">Login</string>
     <string name="btnDeleteAccount">Delete Account</string>
     <string name="btnUpdateAccount">Update Account</string>
@@ -15,6 +16,12 @@
     <string name="title_activity_login">Login</string>
     <string name="btnCreateAccountAsk">Create Account?</string>
     <string name="btnLoginAsk">Login?</string>
-    <string name="title_activity_pet">PetActivity</string>
+    <string name="title_activity_pet">Pet</string>
+    <string name="title_activity_inventory">Inventory</string>
+    <string name="btnManageAccount">Manage Account</string>
+    <string name="btnPet">Pet</string>
+    <string name="btnInventory">Inventory</string>
+    <string name="title_activity_nickname">Nickname</string>
+    <string name ="btnUpdate">Update Nickname</string>
 
 </resources>

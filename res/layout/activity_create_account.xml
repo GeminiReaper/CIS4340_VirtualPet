@@ -16,6 +16,16 @@
                         android:text="@string/Password"
                         android:textSize="20sp"
                         tools:ignore="HardcodedText" />
+      <TextView
+                        android:id="@+id/lblPasswordRepeat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/lblPassword"
+                        android:layout_below="@+id/lblPassword"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/RepeatPassword"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/lblEmail"
@@ -36,8 +46,20 @@
                         android:layout_alignLeft="@+id/txtEmail"
                         android:ems="10"
                         android:inputType="textPassword" >
+                      
 
                         <requestFocus />
+                    </EditText>
+                      <EditText
+                        android:id="@+id/txtPasswordRepeat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/lblPasswordRepeat"
+                        android:layout_alignLeft="@+id/txtPassword"
+                        android:ems="10"
+                        android:inputType="textPassword" >
+                        
+                           <requestFocus />
                     </EditText>
 
                     <EditText
@@ -72,16 +94,6 @@
                         android:inputType="text" />
 
                     <Button
-                        android:id="@+id/btnCreateAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtPassword"
-                        android:layout_marginTop="39dp"
-                        android:layout_toRightOf="@+id/lblPassword"
-                        android:drawableLeft="@drawable/ic_add_person_50"
-                        android:text="@string/btnCreateAccount" />
-
-                    <Button
                         android:id="@+id/btnLoginAsk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -91,5 +103,15 @@
                         android:drawableLeft="@drawable/ic_person_50"
                         android:layout_marginTop="31dp"
                         android:text="@string/btnLoginAsk" />
+
+                    <Button
+                        android:id="@+id/btnCreateAccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/txtPassword"
+                        android:layout_below="@+id/lblPasswordRepeat"
+                        android:layout_marginTop="42dp"
+                        android:drawableLeft="@drawable/ic_add_person_50"
+                        android:text="@string/btnCreateAccount" />
   
 </RelativeLayout>
