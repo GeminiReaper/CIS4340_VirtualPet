@@ -55,3 +55,6 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+AndroidManifest.xml
+AndroidManifest.xml
+res/values/strings.xml

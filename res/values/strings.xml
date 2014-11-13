@@ -16,10 +16,11 @@
     <string name="btnCreateAccountAsk">Create Account?</string>
     <string name="btnLoginAsk">Login?</string>
     <string name="title_activity_pet">PetActivity</string>
-    <string name="action_settings">Settings</string>
+
     <string name="btnInventory">Inventory</string>
         <string name="btnPet">Pet</string>
         <string name="btnManageAccount">Manage Account</string>
         
+<string name="title_activity_inventory">InventoryActivity</string>
 
 </resources>

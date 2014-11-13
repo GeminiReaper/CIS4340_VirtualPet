@@ -43,10 +43,11 @@
             android:name=".PetActivity"
             android:label="@string/title_activity_pet" >
         </activity>
-        <activity
-            android:name=".PetTabbedActivity"
-            android:label="@string/title_activity_pet_tabbed" >
-        </activity>
+ 
+      <activity 
+	android:name=".InventoryActivity"
+        android:label="@string/title_activity_inventory" >
+      </activity>
     </application>
 
 </manifest>
