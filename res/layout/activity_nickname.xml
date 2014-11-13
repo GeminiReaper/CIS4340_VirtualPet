@@ -33,4 +33,33 @@
                 android:drawableLeft="@drawable/ic_action_view_as_grid" 
                 android:text="@string/btnInventory" />
 
+            <TextView
+                android:id="@+id/lblInstruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/btnPet"
+                android:layout_below="@+id/btnManageAccount"
+                android:layout_marginRight="51dp"
+                android:layout_marginTop="102dp"
+                android:text="Enter a nickname for your pet below:" />
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/txtNickname"
+                android:layout_below="@+id/lblInstruction"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="118dp"
+                android:text="@string/btnUpdate" />
+
+            <EditText
+                android:id="@+id/txtNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/lblInstruction"
+                android:layout_below="@+id/lblInstruction"
+                android:layout_marginTop="32dp"
+                android:ems="10" />
+
 </RelativeLayout>

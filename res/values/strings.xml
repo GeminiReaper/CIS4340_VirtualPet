@@ -21,5 +21,6 @@
     <string name="btnPet">Pet</string>
     <string name="btnInventory">Inventory</string>
     <string name="title_activity_nickname">Nickname</string>
+    <string name ="btnUpdate">Update Nickname</string>
 
 </resources>
