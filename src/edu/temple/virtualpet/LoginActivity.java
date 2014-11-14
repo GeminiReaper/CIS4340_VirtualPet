@@ -35,8 +35,8 @@ public class LoginActivity extends Activity {
 	
 	Button btnCreateAccountAsk;
 	Button btnLogin;
-	EditText username;
-	EditText password;
+	EditText txtUsername;
+	EditText txtPassword;
 	
 	private Handler toastHandler = new Handler(new Handler.Callback(){
 		@Override
@@ -56,8 +56,8 @@ public class LoginActivity extends Activity {
 		
 		btnCreateAccountAsk = (Button)findViewById(R.id.btnCreateAccountAsk);
 		btnLogin = (Button)findViewById(R.id.btnLogin);
-		username = (EditText)findViewById(R.id.txtUsername);
-		password = (EditText)findViewById(R.id.txtPassword);
+		txtUsername = (EditText)findViewById(R.id.txtUsername);
+		txtPassword = (EditText)findViewById(R.id.txtPassword);
 		
 		
 		btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +77,8 @@ public class LoginActivity extends Activity {
 						    	
 						 // Add your data
 						        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-						        nameValuePairs.add(new BasicNameValuePair("username", username.getText().toString()));
-						        nameValuePairs.add(new BasicNameValuePair("password", password.getText().toString()));
+						        nameValuePairs.add(new BasicNameValuePair("username", txtUsername.getText().toString()));
+						        nameValuePairs.add(new BasicNameValuePair("password", txtPassword.getText().toString()));
 						        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 						        // Execute HTTP Post Request
@@ -94,8 +94,8 @@ public class LoginActivity extends Activity {
 									String result = jObject.getString("result");
 									String message = jObject.getString("message");
 									JSONObject data = jObject.getJSONObject("data");
-									String userID = data.getString("userId");
-									String strUsername = data.getString("username");
+									String userId = data.getString("userId");
+									String username = data.getString("username");
 									String email = data.getString("email");
 									
 		
@@ -104,16 +104,16 @@ public class LoginActivity extends Activity {
 										loginMessage.obj = "Login Successful!";
 										toastHandler.sendMessage(loginMessage);
 										Intent intent = new Intent(LoginActivity.this, PetActivity.class);
-										intent.putExtra(Constants.USERNAME, strUsername);
+										UserData user = UserData.getInstance();
+										user.setUsername(username);
+										user.setEmail(email);
+										user.setUserId(userId);
+										intent.putExtra(Constants.USERNAME, username);
 										intent.putExtra(Constants.EMAIL, email);
-										intent.putExtra(Constants.USER_ID, userID);
-										startActivity(intent);
-										
-										
+										intent.putExtra(Constants.USER_ID, userId);
+										startActivity(intent);			
 									}
-									else{
-										
-										
+									else{					
 										Message resultMessage = Message.obtain();
 										resultMessage.obj = result + ": " + message;
 										toastHandler.sendMessage(resultMessage);

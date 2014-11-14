@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,19 +20,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class InventoryActivity extends Activity {
 
 	Button btnPet;
 	Button btnManageAccount;
 	Button btnInventory;
-	
+
 	private List<Item> items = new ArrayList<Item>();
 	private Handler handler = new Handler(new Handler.Callback() {
 		@Override
@@ -51,55 +45,48 @@ public class InventoryActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_inventory);
 		fetchInventory();
-		
-		btnPet = (Button)findViewById(R.id.btnPet);
-		btnManageAccount = (Button)findViewById(R.id.btnManageAccount);
-		btnInventory = (Button)findViewById(R.id.btnInventory);
- 
 
-	
-	
-	btnPet.setOnClickListener(new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View arg0) {
-			Intent intent = new Intent(InventoryActivity.this, PetActivity.class);
-			startActivity(intent);
-		
-		
-		}
-	});
-	
-	
-	btnManageAccount.setOnClickListener(new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View arg0) {
-			Intent intent = new Intent(InventoryActivity.this, ManageAccountActivity.class);
-			startActivity(intent);
-		
-		
-		}
-	});
-	
-	btnInventory.setOnClickListener(new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View arg0) {
-			Intent intent = new Intent(InventoryActivity.this, InventoryActivity.class);
-			startActivity(intent);
-		
-		
-		}
-	});
-	
-		
-		
-		
+		btnPet = (Button) findViewById(R.id.btnPet);
+		btnManageAccount = (Button) findViewById(R.id.btnManageAccount);
+		btnInventory = (Button) findViewById(R.id.btnInventory);
+
+		btnPet.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(InventoryActivity.this,
+						PetActivity.class);
+				startActivity(intent);
+
+			}
+		});
+
+		btnManageAccount.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(InventoryActivity.this,
+						ManageAccountActivity.class);
+				startActivity(intent);
+
+			}
+		});
+
+		btnInventory.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(InventoryActivity.this,
+						InventoryActivity.class);
+				startActivity(intent);
+
+			}
+		});
+
 	}
 
 	private void populateInventoryListView() {
-		ArrayAdapter<Item> adapter = new InventoryAdapter(this,items);
+		ArrayAdapter<Item> adapter = new InventoryAdapter(this, items);
 		ListView inventoryListView = (ListView) findViewById(R.id.inventoryListView);
 		inventoryListView.setAdapter(adapter);
 	}
@@ -110,21 +97,13 @@ public class InventoryActivity extends Activity {
 			public void run() {
 				if (Utility.isNetworkAvailable(InventoryActivity.this)) {
 					HttpClient httpclient = new DefaultHttpClient();
-					HttpPost httppost = new HttpPost(Constants.SERVER
-							+ "get_inventory.php");
+					String url = Constants.SERVER + "get_inventory.php?userId="
+							+ UserData.getInstance().getUserId();
+					HttpGet httpGet = new HttpGet(url);
 
 					try {
 
-						// Add your data
-						List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
-								2);
-						nameValuePairs
-								.add(new BasicNameValuePair("userId", ""));
-						httppost.setEntity(new UrlEncodedFormEntity(
-								nameValuePairs));
-
-						// Execute HTTP Post Request
-						HttpResponse response = httpclient.execute(httppost);
+						HttpResponse response = httpclient.execute(httpGet);
 
 						String responseJSON = EntityUtils.toString(response
 								.getEntity());
@@ -139,12 +118,14 @@ public class InventoryActivity extends Activity {
 							if (result.equals("success")) {
 								List<Item> items = new ArrayList<Item>();
 								JSONArray jsonItems = jObject
-										.getJSONArray("item");
+										.getJSONArray("items");
 								for (int i = 0; i < jsonItems.length(); i++) {
 									JSONObject jsonItem = (JSONObject) jsonItems
 											.get(i);
 									// get id as well.
 									items.add(new Item(jsonItem
+											.getString("itemId"), jsonItem
+											.getString("inventoryId"), jsonItem
 											.getString("name"), jsonItem
 											.getString("description"), jsonItem
 											.getString("imageURL")));
@@ -172,6 +153,5 @@ public class InventoryActivity extends Activity {
 		};
 		thread.start();
 	}
-
 
 }

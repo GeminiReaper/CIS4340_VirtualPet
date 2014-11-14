@@ -8,7 +8,7 @@ public class Item
 	private String description;
 	private String imageUrl;
 	
-	public Item(String name, String description, String imageURL)
+	public Item(String itemId, String inventoryId, String name, String description, String imageURL)
 	{
 		setName(name);
 		setDescription(description);
