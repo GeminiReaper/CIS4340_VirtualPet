@@ -22,15 +22,15 @@ public class MainActivity extends Activity {
 		    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		    actionBar.setDisplayShowTitleEnabled(false);
 
-			petTab = actionBar.newTab().setText("Pet")
+			petTab = actionBar.newTab().setText(R.string.title_pet)
 					.setIcon(R.drawable.ic_action_favorite)
 					.setTabListener(new TabListener<PetFragment>(this,"pet", PetFragment.class));
-			inventoryTab = actionBar.newTab().setText("Inventory")
+			inventoryTab = actionBar.newTab().setText(R.string.title_inventory)
 					.setIcon(R.drawable.ic_action_view_as_grid)
 			        .setTabListener(new TabListener<InventoryFragment>(this,"inventory", InventoryFragment.class));
-			manageAccountTab = actionBar.newTab().setText("Manage Account")
+			manageAccountTab = actionBar.newTab().setText(R.string.title_manage_account)
 					.setIcon(R.drawable.ic_action_person)
-					.setTabListener(new TabListener<ManageAccountFragment>(this,"inventory", ManageAccountFragment.class));
+					.setTabListener(new TabListener<ManageAccountFragment>(this,"manageAccount", ManageAccountFragment.class));
 
 			actionBar.addTab(petTab);
 			actionBar.addTab(inventoryTab);
