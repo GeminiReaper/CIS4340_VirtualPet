@@ -23,10 +23,6 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".ManageAccountActivity"
-            android:label="@string/title_activity_manage_account" >
-        </activity>
-        <activity
             android:name=".CreateAccountActivity"
             android:label="@string/title_activity_create_account" >
         </activity>
@@ -38,18 +34,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".PetActivity"
-            android:label="@string/title_activity_pet" >
-        </activity>
-        <activity
-            android:name=".InventoryActivity"
-            android:label="@string/title_activity_inventory" >
-        </activity>
-        <activity
-            android:name=".NicknameActivity"
-            android:label="@string/title_activity_nickname" >
         </activity>
     </application>
 

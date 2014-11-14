@@ -58,7 +58,7 @@ public class InventoryFragment extends ListFragment {
 						try {
 							jObject = new JSONObject(responseJSON);
 							String result = jObject.getString("result");
-							String message = jObject.getString("message");
+							//String message = jObject.getString("message");
 
 							if (result.equals("success")) {
 								List<Item> items = new ArrayList<Item>();
@@ -67,7 +67,7 @@ public class InventoryFragment extends ListFragment {
 								for (int i = 0; i < jsonItems.length(); i++) {
 									JSONObject jsonItem = (JSONObject) jsonItems
 											.get(i);
-									// get id as well.
+						
 									items.add(new Item(jsonItem
 											.getString("itemId"), jsonItem
 											.getString("inventoryId"), jsonItem
