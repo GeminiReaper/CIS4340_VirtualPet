@@ -93,16 +93,7 @@
                         android:ems="10"
                         android:inputType="text" />
 
-                    <Button
-                        android:id="@+id/btnLoginAsk"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/btnCreateAccount"
-                        android:layout_alignRight="@+id/btnCreateAccount"
-                        android:layout_below="@+id/btnCreateAccount"
-                        android:drawableLeft="@drawable/ic_person_50"
-                        android:layout_marginTop="31dp"
-                        android:text="@string/btnLoginAsk" />
+
 
                     <Button
                         android:id="@+id/btnCreateAccount"
