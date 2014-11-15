@@ -17,6 +17,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.squareup.picasso.Picasso;
+
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
@@ -26,26 +28,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PetFragment extends Fragment {
 	TextView txtPetNickname;
 	TextView txtPetName;
 	TextView txtDescription;
-
+	ImageView imgPet;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_pet, container,
 				false);
 		txtPetNickname = (TextView) rootView.findViewById(R.id.txtPetNickname);
-		
 		txtPetName = (TextView) rootView.findViewById(R.id.txtPetName);
 		txtDescription = (TextView) rootView.findViewById(R.id.txtDescription);
+		imgPet = (ImageView) rootView.findViewById(R.id.imgPet);
 
-		
-		
-		
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
@@ -53,117 +54,73 @@ public class PetFragment extends Fragment {
 						.isNetworkAvailable(getActivity())) {
 					// Create a new HttpClient and Post Header
 					HttpClient httpclient = new DefaultHttpClient();
-					//String petID = UserData.getInstance().getUserPetId();
-					String petID = "1";
+					String petID = UserData.getInstance().getUserPetId();
+					//String petID = "1";
 					String url = "http://cis-linux2.temple.edu/~tuc28686/virtualpet/get_pet.php?userId=?userPetId=" + petID;
 					HttpGet httpget = new HttpGet(url);
-							
+
+					try {
+						// Execute HTTP Post Request
+						HttpResponse response = httpclient
+								.execute(httpget);
+
+						String responseJSON = EntityUtils
+								.toString(response.getEntity());
+
+						JSONObject jObject;
+						JSONObject data;
 						try {
+							jObject = new JSONObject(responseJSON);
+							data = jObject.getJSONObject("data");
+							
+							String name = data.getString("name");
+							String description = data.getString("description");
+							String nickname = data.getString("nickname");
+							String imageURL = data.getString("imageURL");
 
-							// Add your data
+							Picasso.with(getActivity()).load(imageURL).into(imgPet);
+							txtPetNickname.setText(nickname);
+							txtPetName.setText(name);
+							txtDescription.setText(description);
+							
+							
 
-							List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
-									2);
-							nameValuePairs.add(new BasicNameValuePair(
-									"username", username.getText()
-											.toString()));
-							nameValuePairs.add(new BasicNameValuePair(
-									"password", password.getText()
-											.toString()));
-							nameValuePairs
-									.add(new BasicNameValuePair(
-											"email", email.getText()
-													.toString()));
-							httppost.setEntity(new UrlEncodedFormEntity(
-									nameValuePairs));
-
-							// Execute HTTP Post Request
-							HttpResponse response = httpclient
-									.execute(httppost);
-
-							String responseJSON = EntityUtils
-									.toString(response.getEntity());
-
-							JSONObject jObject;
-
-							try {
-								jObject = new JSONObject(responseJSON);
-								String result = jObject
-										.getString("result");
-								String message = jObject
-										.getString("message");
-
-								if (result.equals("success")) {
-
-									Intent intent = new Intent(
-											CreateAccountActivity.this,
-											LoginActivity.class);
-									// intent.putExtra(name, value);
-									startActivity(intent);
-
-								} else {
-
-									if (message
-											.startsWith("SQLSTATE[23000]:")) {
-										message = "Username already exists";
-									}
-									Message resultMessage = Message
-											.obtain();
-									resultMessage.obj = result + ": "
-											+ message;
-									toastHandler
-											.sendMessage(resultMessage);
-
-								}
-
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-
-						} catch (ClientProtocolException e) {
+						} catch (JSONException e) {
 							// TODO Auto-generated catch block
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-						}}
+							e.printStackTrace();		
+						}
+						
+					}
+						
+						catch (Exception e){
 
+						
+							Message message = Message.obtain();
+							message.obj = "No Network Connection";
+							//toastHandler.sendMessage(message);
+						
+						}
+				}
 			
 					}
-					
-
-				else {
-					Message message = Message.obtain();
-					message.obj = "No Network Connection";
-					//toastHandler.sendMessage(message);
-				}
-
 		};
+					
+				
 
-		thread.start();
+					thread.start();
+		
+			
+			
+			
+			txtPetNickname.setOnClickListener(new View.OnClickListener() {
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		txtPetNickname.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				    // Create the fragment and show it as a dialog.
-				    DialogFragment newFragment = RenameDialogFragment.newInstance();
-				    newFragment.show(getFragmentManager(), "dialog");
-			}
-		});
-		
-		
-		return rootView;
+						@Override
+						public void onClick(View view) {
+							// Create the fragment and show it as a dialog.
+							DialogFragment newFragment = RenameDialogFragment.newInstance();
+							newFragment.show(getFragmentManager(), "dialog");
+						}
+					});
+					return rootView;
 	}
-	
-	
-	
 }
