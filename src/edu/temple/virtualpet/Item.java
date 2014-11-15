@@ -32,7 +32,7 @@ public class Item
 	}
 
 	public String getImageUrl() {
-		return imageUrl;
+		return Constants.SERVER + imageUrl;
 	}
 
 	public void setImageUrl(String imageURL) {

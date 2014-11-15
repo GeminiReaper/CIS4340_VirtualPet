@@ -8,6 +8,7 @@ public class UserData {
 	private String username;
 	private String email;
 	private String petNickname;
+	private String userPetId;
 	public String getUserId() {
 		return userId;
 	}
@@ -25,7 +26,7 @@ public class UserData {
 	}
 	public void setPetNickname(String petNickname) {
 		this.petNickname = petNickname;
-	} 
+	}
 	
 	public static UserData getInstance() {
 		if(instance == null) {
@@ -38,5 +39,11 @@ public class UserData {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getUserPetId() {
+		return userPetId;
+	}
+	public void setUserPetId(String userPetId) {
+		this.userPetId = userPetId;
 	}
 }
