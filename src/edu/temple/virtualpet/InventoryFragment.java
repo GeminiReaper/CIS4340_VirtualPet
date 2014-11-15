@@ -1,6 +1,9 @@
 package edu.temple.virtualpet;
 
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +18,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class InventoryFragment extends ListFragment {
+	private static final String Item = null;
 	private List<Item> items = new ArrayList<Item>();
 	private Handler handler = new Handler(new Handler.Callback() {
 		@Override
@@ -104,4 +111,23 @@ public class InventoryFragment extends ListFragment {
 		fetchInventory();
 	    super.onActivityCreated(savedInstanceState);
 	  }
-}
+	  @Override
+	  public void onListItemClick ( ListView listview, View view, int position, long id){
+		  Item item = items.get(position);
+		  try{
+			  
+		  ByteArrayOutputStream b = new ByteArrayOutputStream();
+	        ObjectOutputStream o = new ObjectOutputStream(b);
+	        o.writeObject(item);
+	       byte [] data = b.toByteArray();
+		  Intent intent = new Intent(getActivity(),NfcGiveActivity.class);
+		  intent.putExtra(Constants.ITEM, data);
+		  startActivity(intent);
+		  
+		  }
+		  catch(IOException ex){
+		        ex.printStackTrace();
+		    }
+		  }
+	  }
+
