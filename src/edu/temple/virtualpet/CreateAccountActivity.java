@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 public class CreateAccountActivity extends Activity {
 
-	Button btnLoginAsk;
 	Button btnCreateAccount;
 	EditText username;
 	EditText password;
@@ -50,7 +49,6 @@ public class CreateAccountActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_account);
 
-		btnLoginAsk = (Button) findViewById(R.id.btnLoginAsk);
 		btnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
 		username = (EditText) findViewById(R.id.txtUsername);
 		password = (EditText) findViewById(R.id.txtPassword);
@@ -173,15 +171,6 @@ public class CreateAccountActivity extends Activity {
 			};
 		});
 
-		btnLoginAsk.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(CreateAccountActivity.this,
-						LoginActivity.class);
-				startActivity(intent);
-
-			}
-		});
 	}
 }
