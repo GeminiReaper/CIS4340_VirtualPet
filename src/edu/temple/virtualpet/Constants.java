@@ -11,4 +11,6 @@ public class Constants {
 	public static final String ITEM_ID = "ITEM_ID";
 	public static final String ITEM_DESCRIPTION = "ITEM_DESCRIPTION";
 	public static final String PET_NICKNAME = "PET_NICKNAME";
+	public static final String ITEM = "ITEM";
+
 }
