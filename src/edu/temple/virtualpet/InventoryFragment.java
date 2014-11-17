@@ -1,6 +1,5 @@
 package edu.temple.virtualpet;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -22,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -29,7 +29,8 @@ import android.widget.PopupMenu;
 
 public class InventoryFragment extends ListFragment {
 	private List<Item> items = new ArrayList<Item>();
-	
+	private int selectedItemIndex = 0;
+
 	private Handler handler = new Handler(new Handler.Callback() {
 		@Override
 		public boolean handleMessage(Message msg) {
@@ -38,7 +39,7 @@ public class InventoryFragment extends ListFragment {
 			return false;
 		}
 	});
-	
+
 	private void populateInventoryListView() {
 		ArrayAdapter<Item> adapter = new InventoryAdapter(getActivity(), items);
 		setListAdapter(adapter);
@@ -66,7 +67,7 @@ public class InventoryFragment extends ListFragment {
 						try {
 							jObject = new JSONObject(responseJSON);
 							String result = jObject.getString("result");
-							//String message = jObject.getString("message");
+							// String message = jObject.getString("message");
 
 							if (result.equals("success")) {
 								List<Item> items = new ArrayList<Item>();
@@ -75,7 +76,7 @@ public class InventoryFragment extends ListFragment {
 								for (int i = 0; i < jsonItems.length(); i++) {
 									JSONObject jsonItem = (JSONObject) jsonItems
 											.get(i);
-						
+
 									items.add(new Item(jsonItem
 											.getString("itemId"), jsonItem
 											.getString("inventoryId"), jsonItem
@@ -106,36 +107,65 @@ public class InventoryFragment extends ListFragment {
 		};
 		thread.start();
 	}
-	
-	  @Override
-	  public void onActivityCreated(Bundle savedInstanceState) {
-		fetchInventory();
-	    super.onActivityCreated(savedInstanceState);
-	  }
-	  @Override
-	  public void onListItemClick ( ListView listview, View view, int position, long id){
-		  
-		  PopupMenu popup = new PopupMenu(getActivity(), view);
-		  popup.getMenuInflater().inflate(R.layout.popup_menu, popup.getMenu());
-		  popup.show();
-		  /*
-		  Item item = items.get(position);
-		  try{
-			  
-		  ByteArrayOutputStream b = new ByteArrayOutputStream();
-	        ObjectOutputStream o = new ObjectOutputStream(b);
-	        o.writeObject(item);
-	       byte [] data = b.toByteArray();
-		  Intent intent = new Intent(getActivity(),NfcGiveActivity.class);
-		  intent.putExtra(Constants.ITEM, data);
-		  startActivity(intent);
-		  
-		  }
-		  catch(IOException ex){
-		        ex.printStackTrace();
-		    }
-		    */
-		  }
-		 
-	  }
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		fetchInventory();
+		super.onActivityCreated(savedInstanceState);
+	}
+
+	@Override
+	public void onListItemClick(ListView listview, View view, int position,
+			long id) {
+		selectedItemIndex = position;
+		PopupMenu popup = new PopupMenu(getActivity(), view);
+		popup.getMenuInflater().inflate(R.layout.popup_menu, popup.getMenu());
+
+		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				switch (item.getItemId()) {
+				case 1:
+					feedPet();
+					return true;
+				case 2:
+					giveItem();
+					return true;
+				case 3:
+					discardItem();
+					return true;
+				}
+				return false;
+			}
+		});
+
+		popup.show();
+	}
+
+	private void giveItem() {
+		Item item = items.get(selectedItemIndex);
+		try {
+
+			ByteArrayOutputStream b = new ByteArrayOutputStream();
+			ObjectOutputStream o = new ObjectOutputStream(b);
+			o.writeObject(item);
+			byte[] data = b.toByteArray();
+			Intent intent = new Intent(getActivity(), NfcGiveActivity.class);
+			intent.putExtra(Constants.ITEM, data);
+			startActivity(intent);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void discardItem() {
+		
+	}
+	
+	private void feedPet() {
+		
+	}
+
+}
