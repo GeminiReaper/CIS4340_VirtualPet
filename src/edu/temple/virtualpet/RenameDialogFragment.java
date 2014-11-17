@@ -65,6 +65,7 @@ public class RenameDialogFragment extends DialogFragment {
 
 		View view = inflater.inflate(R.layout.fragment_rename_dialog,
 				container, false);
+		btnUpdate = (Button)view.findViewById(R.id.btnUpdate);
 		txtNickname = (EditText) view.findViewById(R.id.txtNickname);
 		getDialog().setTitle("Rename Pet");
 
