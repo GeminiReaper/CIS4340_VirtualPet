@@ -25,10 +25,11 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 public class InventoryFragment extends ListFragment {
-	private static final String Item = null;
 	private List<Item> items = new ArrayList<Item>();
+	
 	private Handler handler = new Handler(new Handler.Callback() {
 		@Override
 		public boolean handleMessage(Message msg) {
@@ -113,6 +114,11 @@ public class InventoryFragment extends ListFragment {
 	  }
 	  @Override
 	  public void onListItemClick ( ListView listview, View view, int position, long id){
+		  
+		  PopupMenu popup = new PopupMenu(getActivity(), view);
+		  popup.getMenuInflater().inflate(R.layout.popup_menu, popup.getMenu());
+		  popup.show();
+		  /*
 		  Item item = items.get(position);
 		  try{
 			  
@@ -128,6 +134,8 @@ public class InventoryFragment extends ListFragment {
 		  catch(IOException ex){
 		        ex.printStackTrace();
 		    }
+		    */
 		  }
+		 
 	  }
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
     <item
         android:id="@+id/item_feed"
         android:showAsAction="ifRoom|withText"
@@ -12,14 +11,13 @@
         android:title="Give to Friend"
         android:visible="true"/>
     <item
-        android:id="@+id/item_cancel"
-        android:showAsAction="ifRoom|withText"
-        android:title="Cancel"
-        android:visible="true"/>
-    <item
         android:id="@+id/item_delete"
         android:showAsAction="ifRoom|withText"
         android:title="Delete"
         android:visible="true"/>
-
+    <item
+        android:id="@+id/item_cancel"
+        android:showAsAction="ifRoom|withText"
+        android:title="Cancel"
+        android:visible="true"/>
 </menu>
