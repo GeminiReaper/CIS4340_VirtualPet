@@ -20,6 +20,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.squareup.picasso.Picasso;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.nfc.NdefMessage;
@@ -33,6 +35,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,26 +60,59 @@ public class NfcGiveActivity extends Activity implements
 			return false;
 		}
 	});
-
+	/*
+	private Handler addHandler = new Handler(new Handler.Callback(){
+		@Override
+		public boolean handleMessage(Message message){
+			return false;
+		}
+	});
+	
+	private Handler removeHandler = new Handler(new Handler.Callback(){
+		@Override
+		public boolean handleMessage(Message message){
+			return false;
+		}
+	});
+*/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_give_nfc);
+		lblName = (TextView) findViewById(R.id.lblName);
+		lblDescription = (TextView) findViewById(R.id.lblDescription);
+		btnOk = (Button) findViewById(R.id.btnOk);
+		imgUrl = (ImageView) findViewById(R.id.imgUrl);
 		Intent intent = getIntent();
-		byte[] data = intent.getByteArrayExtra(Constants.ITEM);
-		ByteArrayInputStream b = new ByteArrayInputStream(data);
-		ObjectInputStream o;
-		try {
-			o = new ObjectInputStream(b);
-
-			item = (Item) o.readObject();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		Bundle extras = intent.getExtras();
+		
+		btnOk.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(NfcGiveActivity.this, MainActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		if(extras.containsKey(Constants.ITEM)) {
+			byte[] data = intent.getByteArrayExtra(Constants.ITEM);
+			ByteArrayInputStream b = new ByteArrayInputStream(data);
+			ObjectInputStream o;
+			try {
+				o = new ObjectInputStream(b);
+				getActionBar().setTitle("Giving Item");
+				item = (Item) o.readObject();
+				lblName.setText(item.getName());
+				lblDescription.setText(item.getDescription());
+				Picasso.with(this).load(item.getImageUrl());
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
-
-		// TextView textView = (TextView) findViewById(R.id.textView);
+		
 		// Check for available NFC Adapter
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		if (mNfcAdapter == null) {
@@ -97,7 +133,6 @@ public class NfcGiveActivity extends Activity implements
 			o = new ObjectOutputStream(b);
 			o.writeObject(item);
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 		byte[] data = b.toByteArray();
@@ -129,10 +164,6 @@ public class NfcGiveActivity extends Activity implements
 
 	void processIntent(Intent intent) {
 
-		lblName = (TextView) findViewById(R.id.lblName);
-		lblDescription = (TextView) findViewById(R.id.lblDescription);
-		btnOk = (Button) findViewById(R.id.btnOk);
-		imgUrl = (ImageView) findViewById(R.id.imgUrl);
 
 		Parcelable[] rawMsgs = intent
 				.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
@@ -143,14 +174,17 @@ public class NfcGiveActivity extends Activity implements
 		ObjectInputStream o;
 		try {
 			o = new ObjectInputStream(b);
+			getActionBar().setTitle("Receiving Item");
 			item = (Item) o.readObject();
+			lblName.setText(item.getName());
+			lblDescription.setText(item.getDescription());
+			Picasso.with(this).load(item.getImageUrl());
 			addItem();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void addItem() {

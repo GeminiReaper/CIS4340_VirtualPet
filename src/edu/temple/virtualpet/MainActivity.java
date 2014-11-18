@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 		try {
 			ActionBar actionBar = getActionBar();
 		    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		    actionBar.setDisplayShowTitleEnabled(false);
+		    actionBar.setDisplayShowTitleEnabled(true);
 
 			petTab = actionBar.newTab().setText(R.string.title_pet)
 					.setIcon(R.drawable.ic_action_favorite)

@@ -1,7 +1,13 @@
 package edu.temple.virtualpet;
 
-public class Item 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Item implements Serializable 
 {
+	private static final long serialVersionUID = 1L;
 	private String itemId;
 	private String inventoryId;
 	private String name;
@@ -55,6 +61,14 @@ public class Item
 
 	public void setInventoryId(String inventoryId) {
 		this.inventoryId = inventoryId;
+	}
+	
+	private void readObject(ObjectInputStream inputStream) throws ClassNotFoundException, IOException {
+		inputStream.defaultReadObject();
+	}
+	
+	private void writeObject(ObjectOutputStream outputStream) throws IOException {
+		outputStream.defaultWriteObject();
 	}
 	
 }

@@ -240,7 +240,7 @@ public class InventoryFragment extends ListFragment {
 	}
 	
 	private void feedPet() {
-		Intent intent = new Intent(getActivity(), Pet.class);
+		Intent intent = new Intent(getActivity(), MainActivity.class);
 		startActivity(intent);
 	}
 
