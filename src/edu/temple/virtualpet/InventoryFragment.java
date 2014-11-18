@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,15 +25,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 public class InventoryFragment extends ListFragment {
 	private List<Item> items = new ArrayList<Item>();
 	private int selectedItemIndex = 0;
+	private ArrayAdapter<Item> adapter;
+	
+	private Handler toastHandler = new Handler(new Handler.Callback(){
+		@Override
+		public boolean handleMessage(Message message){
+			Toast toast = Toast.makeText(getActivity(), (String)message.obj, Toast.LENGTH_LONG);
+			toast.show();
+			return false;
+		}
+	});
 
 	private Handler handler = new Handler(new Handler.Callback() {
 		@Override
@@ -39,9 +55,18 @@ public class InventoryFragment extends ListFragment {
 			return false;
 		}
 	});
+	
+	private Handler removeHandler = new Handler(new Handler.Callback() {
+		@Override
+		public boolean handleMessage(Message msg) {
+			adapter.remove((Item)msg.obj);
+			adapter.notifyDataSetChanged();
+			return false;
+		}
+	});
 
 	private void populateInventoryListView() {
-		ArrayAdapter<Item> adapter = new InventoryAdapter(getActivity(), items);
+		adapter = new InventoryAdapter(getActivity(), items);
 		setListAdapter(adapter);
 	}
 
@@ -125,14 +150,15 @@ public class InventoryFragment extends ListFragment {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
+				Log.i("POPUP",String.valueOf(item.getItemId()));
 				switch (item.getItemId()) {
-				case 1:
+				case R.id.item_feed:
 					feedPet();
 					return true;
-				case 2:
+				case R.id.item_give:
 					giveItem();
 					return true;
-				case 3:
+				case R.id.item_delete:
 					discardItem();
 					return true;
 				}
@@ -161,7 +187,54 @@ public class InventoryFragment extends ListFragment {
 	}
 	
 	private void discardItem() {
-		
+		final Item item = items.get(selectedItemIndex);
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				if (Utility.isNetworkAvailable(getActivity())){
+					HttpClient httpclient = new DefaultHttpClient();
+					HttpPost httpPost = new HttpPost(Constants.SERVER + "remove_item.php");
+					
+					try
+					{
+						 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+					     nameValuePairs.add(new BasicNameValuePair("inventoryId",item.getInventoryId()));
+					     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+					     HttpResponse response = httpclient.execute(httpPost);
+					     String responseJSON = EntityUtils.toString(response.getEntity());
+					     Log.i("JSON", responseJSON);
+					     JSONObject jObject = new JSONObject(responseJSON);
+					     
+					     String result = jObject.getString("result");
+					     String message = jObject.getString("message");
+					     Log.i("JSON", result + " : " + message);
+					     
+					     if(result.equals("success")) {
+					    	 Message msg = Message.obtain();
+					    	 msg.obj = item;
+					    	 removeHandler.sendMessage(msg);
+					     }
+					     
+					}
+					catch(ClientProtocolException e) {
+						e.printStackTrace();
+					}
+					catch(IOException e) {
+						e.printStackTrace();
+					}
+					catch(JSONException e) {
+						e.printStackTrace();
+					}
+					
+				}
+				else{					
+					Message message = Message.obtain();
+					message.obj = "No network activity.";
+					toastHandler.sendMessage(message);
+				}
+			}
+		};
+		thread.start();
 	}
 	
 	private void feedPet() {

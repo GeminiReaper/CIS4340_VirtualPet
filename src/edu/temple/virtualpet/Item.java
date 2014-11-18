@@ -13,6 +13,8 @@ public class Item
 		setName(name);
 		setDescription(description);
 		setImageUrl(imageURL);
+		setInventoryId(inventoryId);
+		setItemId(itemId);
 	}
 
 	public String getName() {
