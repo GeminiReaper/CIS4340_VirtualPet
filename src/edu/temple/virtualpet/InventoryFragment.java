@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -42,6 +43,7 @@ public class InventoryFragment extends ListFragment {
 		@Override
 		public boolean handleMessage(Message message){
 			Toast toast = Toast.makeText(getActivity(), (String)message.obj, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.show();
 			return false;
 		}

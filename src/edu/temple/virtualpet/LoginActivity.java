@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
 		@Override
 		public boolean handleMessage(Message message){
 			Toast toast = Toast.makeText(LoginActivity.this, (String)message.obj, Toast.LENGTH_LONG);
-			toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.show();
 			return false;
 		}

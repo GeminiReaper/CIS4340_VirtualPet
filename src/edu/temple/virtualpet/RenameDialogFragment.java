@@ -21,6 +21,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class RenameDialogFragment extends DialogFragment {
 		public boolean handleMessage(Message message) {
 			Toast toast = Toast.makeText(getActivity(), (String) message.obj,
 					Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.show();
 			return false;
 		}
