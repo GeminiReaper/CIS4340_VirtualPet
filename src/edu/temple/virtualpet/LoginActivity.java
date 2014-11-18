@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,7 @@ public class LoginActivity extends Activity {
 		@Override
 		public boolean handleMessage(Message message){
 			Toast toast = Toast.makeText(LoginActivity.this, (String)message.obj, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
 			toast.show();
 			return false;
 		}
@@ -138,6 +140,7 @@ public class LoginActivity extends Activity {
 							Message message = Message.obtain();
 							message.obj = "No Network Connection";
 							toastHandler.sendMessage(message);
+
 					}					
 					}
 				};

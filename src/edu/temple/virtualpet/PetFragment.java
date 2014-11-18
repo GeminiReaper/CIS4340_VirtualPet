@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class PetFragment extends Fragment {
 		public boolean handleMessage(Message message) {
 			Toast toast = Toast.makeText(getActivity(), (String) message.obj,
 					Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
 			toast.show();
 			return false;
 		}
