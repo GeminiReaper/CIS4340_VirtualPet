@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class RenameDialogFragment extends DialogFragment {
@@ -44,7 +42,7 @@ public class RenameDialogFragment extends DialogFragment {
 			return false;
 		}
 	});
-	
+
 	private Handler dismissDialog = new Handler(new Handler.Callback() {
 		@Override
 		public boolean handleMessage(Message message) {
@@ -52,8 +50,6 @@ public class RenameDialogFragment extends DialogFragment {
 			return false;
 		}
 	});
-	
-	
 
 	static RenameDialogFragment newInstance() {
 		return new RenameDialogFragment();
@@ -65,7 +61,7 @@ public class RenameDialogFragment extends DialogFragment {
 
 		View view = inflater.inflate(R.layout.fragment_rename_dialog,
 				container, false);
-		btnUpdate = (Button)view.findViewById(R.id.btnUpdate);
+		btnUpdate = (Button) view.findViewById(R.id.btnUpdate);
 		txtNickname = (EditText) view.findViewById(R.id.txtNickname);
 		getDialog().setTitle("Rename Pet");
 
@@ -81,16 +77,18 @@ public class RenameDialogFragment extends DialogFragment {
 						if (Utility.isNetworkAvailable(getActivity())) {
 							// Create a new HttpClient and Post Header
 							HttpClient httpclient = new DefaultHttpClient();
-							HttpPost httppost = new HttpPost(
-									"http://cis-linux2.temple.edu/~tuc28686/virtualpet/rename_pet.php");
+							HttpPost httppost = new HttpPost(Constants.SERVER
+									+ "rename_pet.php");
 
 							// Add your nickname
 							List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 									2);
 							nameValuePairs.add(new BasicNameValuePair(
-									"nickname", txtNickname.getText().toString()));
+									"nickname", txtNickname.getText()
+											.toString()));
 							nameValuePairs.add(new BasicNameValuePair(
-									"userPetId", UserData.getInstance().getUserPetId()));
+									"userPetId", UserData.getInstance()
+											.getUserPetId()));
 							try {
 								httppost.setEntity(new UrlEncodedFormEntity(
 										nameValuePairs));
@@ -101,40 +99,30 @@ public class RenameDialogFragment extends DialogFragment {
 
 								String responseJSON = EntityUtils
 										.toString(response.getEntity());
-								try {
-									JSONObject jObject = new JSONObject(
-											responseJSON);
-									String result = jObject.getString("result");
-									String message = jObject
-											.getString("message");
 
-									if (!(result.equals("success"))) {
-										// toast
-										Message resultMessage = Message
-												.obtain();
-										resultMessage.obj = result + ": "
-												+ message;
-										toastHandler.sendMessage(resultMessage);
-									}
-									else{
-										//call handler for closing
-										Message resultMessage0 = Message.obtain();
-										resultMessage0.obj = "";
-										dismissDialog.sendMessage(resultMessage0);
-									}
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+								JSONObject jObject = new JSONObject(
+										responseJSON);
+								String result = jObject.getString("result");
+								String message = jObject.getString("message");
+
+								if (!(result.equals("success"))) {
+									// toast
+									Message resultMessage = Message.obtain();
+									resultMessage.obj = result + ": " + message;
+									toastHandler.sendMessage(resultMessage);
+								} else {
+									// call handler for closing
+									Message resultMessage0 = Message.obtain();
+									resultMessage0.obj = "";
+									dismissDialog.sendMessage(resultMessage0);
 								}
-
+							} catch (JSONException e) {
+								e.printStackTrace();
 							} catch (UnsupportedEncodingException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} catch (ClientProtocolException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 
@@ -148,8 +136,6 @@ public class RenameDialogFragment extends DialogFragment {
 				};
 
 				thread.start();
-			
-				
 			}
 		});
 		return view;
