@@ -35,7 +35,7 @@ public class PetFragment extends Fragment {
 		public boolean handleMessage(Message message) {
 			Toast toast = Toast.makeText(getActivity(), (String) message.obj,
 					Toast.LENGTH_LONG);
-			toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.show();
 			return false;
 		}
