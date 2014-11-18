@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +40,7 @@ public class CreateAccountActivity extends Activity {
 		public boolean handleMessage(Message message) {
 			Toast toast = Toast.makeText(CreateAccountActivity.this,
 					(String) message.obj, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
 			toast.show();
 			return false;
 		}
