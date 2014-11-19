@@ -289,7 +289,7 @@ public class NfcGiveActivity extends Activity implements
 
 						if (result.equals("success")) {
 							Message msg = Message.obtain();
-							msg.obj = "Item Added!";
+							msg.obj = "Item Sent!";
 							toastHandler.sendMessage(msg);
 						} else {
 							Message msg = Message.obtain();
