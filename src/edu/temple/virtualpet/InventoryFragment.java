@@ -240,7 +240,9 @@ public class InventoryFragment extends ListFragment {
 	}
 	
 	private void feedPet() {
+		Item item = items.get(selectedItemIndex);
 		Intent intent = new Intent(getActivity(), MainActivity.class);
+		intent.putExtra(Constants.ITEM_NAME, item.getName());
 		startActivity(intent);
 	}
 
