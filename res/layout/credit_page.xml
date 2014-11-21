@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/txtView1"
+        android:layout_width="327dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.00"
+        android:text="This piece of art is brought to you by :" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.00"
+        android:text="Matthew 
+        	David
+        		 Bahaa
+        			 Nicole" />
+
+    <TextView
+        android:id="@+id/txtView2"
+        android:layout_width="482dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:text="No Annimals Were Harmed in the Making of this application" />
+
+</LinearLayout>
