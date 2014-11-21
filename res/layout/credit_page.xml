@@ -26,6 +26,6 @@
         android:layout_width="482dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
-        android:text="No Annimals Were Harmed in the Making of this application" />
+        android:text="No Animals Were Harmed in the Making of this application" />
 
 </LinearLayout>
