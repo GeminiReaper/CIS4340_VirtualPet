@@ -50,7 +50,7 @@ public class PetFragment extends Fragment {
 			
 			Intent intent = getActivity().getIntent();
 			Bundle extras = intent.getExtras();
-			if(extras.containsKey("nickname")){
+			if(extras != null && extras.containsKey("nickname")){
 			
 				String nickname = extras.getString("nickname");
 				txtPetNickname.setText(nickname);
