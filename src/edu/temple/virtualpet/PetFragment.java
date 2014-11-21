@@ -47,7 +47,17 @@ public class PetFragment extends Fragment {
 		public boolean handleMessage(Message message) {
 			Pet pet = (Pet) message.obj;
 			Picasso.with(getActivity()).load(pet.getImageUrl()).into(imgPet);
+			
+			Intent intent = getActivity().getIntent();
+			Bundle extras = intent.getExtras();
+			if(extras.containsKey("nickname")){
+			
+				String nickname = extras.getString("nickname");
+				txtPetNickname.setText(nickname);
+			}
+			else {
 			txtPetNickname.setText(pet.getNickname());
+			}
 			txtPetName.setText(pet.getName());
 			txtDescription.setText(pet.getDescription());
 			return false;
