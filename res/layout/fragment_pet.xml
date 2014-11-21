@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center|center_vertical"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/background_test" >
 
     
         <TextView
@@ -15,6 +16,7 @@
         android:layout_gravity="center"
         android:text="[Pet Name]"
         android:textSize="52sp"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
         
     <TextView
@@ -28,12 +30,13 @@
         android:onClick="onClick"
         android:text="[Pet Nickname]"
         android:textSize="42sp"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
         android:id="@+id/imgPet"
-        android:layout_width="500dp"
-        android:layout_height="500dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_alignParentLeft="true"
         android:layout_gravity="center"
         android:contentDescription="image not found"
@@ -48,6 +51,7 @@
         android:layout_gravity="center"
         android:text="[Pet Description]"
         android:textSize="32sp"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
