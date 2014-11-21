@@ -60,11 +60,10 @@
                         android:id="@+id/btnLogin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/txtPassword"
-                        android:layout_alignRight="@+id/txtPassword"
                         android:layout_below="@+id/txtPassword"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="29dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginTop="44dp"
+                        android:layout_toRightOf="@+id/lblPassword"
                         android:drawableLeft="@drawable/ic_person_50"
                         android:text="@string/btnLogin" />
 
@@ -74,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/btnLogin"
                         android:layout_below="@+id/btnLogin"
-                        android:layout_marginTop="57dp"
+                        android:layout_marginTop="21dp"
                         android:drawableLeft="@drawable/ic_add_person_50"
                         android:text="@string/btnCreateAccountAsk" />
 
