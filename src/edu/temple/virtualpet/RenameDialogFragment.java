@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -127,7 +128,13 @@ public class RenameDialogFragment extends DialogFragment {
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
-
+//////////////////////////////////
+							Intent intent = new Intent(getActivity(), MainActivity.class);
+							intent.putExtra("nickname", txtNickname.getText()
+									.toString());
+							startActivity(intent);
+//////////////////////////////////							
+							
 						} else {
 							Message message1 = Message.obtain();
 							message1.obj = "No Network Connection";
