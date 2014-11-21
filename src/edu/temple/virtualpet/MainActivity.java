@@ -26,6 +26,11 @@ public class MainActivity extends Activity {
 			return false;
 		}
 	});
+	
+	@Override
+	public void onBackPressed() {
+		//Do nothing.
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
