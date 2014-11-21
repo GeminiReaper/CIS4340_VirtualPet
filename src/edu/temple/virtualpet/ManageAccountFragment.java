@@ -1,5 +1,12 @@
 package edu.temple.virtualpet;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,19 +51,36 @@ public class ManageAccountFragment extends Fragment {
 				Thread updateUserInfo = new Thread() {
 					
 					public void run() {
-						try {
-							String noNetwork = "No Available Network";
-							Message msg = Message.obtain();
-							if(!(Utility.isNetworkAvailable(getActivity()))) {
-								msg.obj = noNetwork;
-								toastHandler.sendMessage(msg);
-							} 
-							
-							
+						String noNetwork = "No Available Network";
+						Message msg = Message.obtain();
 						
-						} catch (Exception e) {
-							e.printStackTrace();;
-						}
+						if(!(Utility.isNetworkAvailable(getActivity()))) {
+							
+							/* No Network Message to User */
+							msg.obj = noNetwork;
+							toastHandler.sendMessage(msg);
+							
+							HttpClient httpclient = new DefaultHttpClient();
+							String userId = UserData.getInstance().getUserId();
+							String url = Constants.SERVER + "update_user.php"
+									+ userId;
+							HttpPost httppost = new HttpPost(url);
+							
+							try {
+								HttpResponse response = httpclient.execute(httppost);
+								String responseJSON = EntityUtils.toString(
+																response.getEntity());
+								
+								
+								
+								
+							
+							} catch (Exception e) {
+								e.printStackTrace();;
+							}
+
+						}//end if 
+						
 						
 					}//end run	
 				};//end udateUserInfo Thread
