@@ -5,6 +5,18 @@
     android:gravity="center|center_vertical"
     android:orientation="vertical" >
 
+    
+        <TextView
+        android:id="@+id/txtPetName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/txtPetNickname"
+        android:layout_gravity="center"
+        android:text="[Pet Name]"
+        android:textSize="52sp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+        
     <TextView
         android:id="@+id/txtPetNickname"
         android:layout_width="wrap_content"
@@ -15,12 +27,13 @@
         android:clickable="true"
         android:onClick="onClick"
         android:text="[Pet Nickname]"
+        android:textSize="42sp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
         android:id="@+id/imgPet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
         android:layout_alignParentLeft="true"
         android:layout_gravity="center"
         android:contentDescription="image not found"
@@ -34,16 +47,9 @@
         android:layout_below="@+id/imgPet"
         android:layout_gravity="center"
         android:text="[Pet Description]"
+        android:textSize="32sp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/txtPetName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/txtPetNickname"
-        android:layout_gravity="center"
-        android:text="[Pet Name]"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 
 </LinearLayout>
