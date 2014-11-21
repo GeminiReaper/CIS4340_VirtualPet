@@ -14,6 +14,7 @@ public class MainActivity extends Activity {
 	PetFragment petFragment;
 	InventoryFragment inventoryFragment;
 	ManageAccountFragment manageAccountFragment;
+	//creditPage creditPage;
 	ActionBar.Tab petTab, inventoryTab, manageAccountTab;
 	
 	private Handler toastHandler = new Handler(new Handler.Callback() {
@@ -64,10 +65,13 @@ public class MainActivity extends Activity {
 			manageAccountTab = actionBar.newTab().setText(R.string.title_manage_account)
 					.setIcon(R.drawable.ic_action_person)
 					.setTabListener(new TabListener<ManageAccountFragment>(this,"manageAccount", ManageAccountFragment.class));
+			//creditPage = actionBar.newTab().SetText("Credits")
+			//		.setIcon(R.drawable.ic_action_person)
 
 			actionBar.addTab(petTab);
 			actionBar.addTab(inventoryTab);
 			actionBar.addTab(manageAccountTab);
+		//	actionBar.addTab(creditPage)
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
