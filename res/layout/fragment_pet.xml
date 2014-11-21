@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:gravity="center|center_vertical"
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/txtPetNickname"
@@ -10,11 +11,20 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtDescription"
         android:layout_below="@+id/txtPetName"
-        android:layout_marginTop="20dp"
-        android:text="[Pet Nickname]"
+        android:layout_gravity="center"
+        android:clickable="true"
         android:onClick="onClick"
-		android:clickable="true"
+        android:text="[Pet Nickname]"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/imgPet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="center"
+        android:contentDescription="image not found"
+        android:src="@drawable/test_owl" />
 
     <TextView
         android:id="@+id/txtDescription"
@@ -22,8 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/imgPet"
         android:layout_below="@+id/imgPet"
-        android:layout_marginLeft="19dp"
-        android:layout_marginTop="66dp"
+        android:layout_gravity="center"
         android:text="[Pet Description]"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -33,19 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/txtPetNickname"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="178dp"
+        android:layout_gravity="center"
         android:text="[Pet Name]"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ImageView
-        android:id="@+id/imgPet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtPetNickname"
-        android:layout_marginLeft="175dp"
-        android:layout_marginTop="68dp"
-        android:src="@drawable/test_owl" 
-        android:contentDescription="image not found"/>
-</RelativeLayout>
+</LinearLayout>
