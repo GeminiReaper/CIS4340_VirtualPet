@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">VirtualPet</string>
+    <string name="app_name">Virtual Pet</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_manage_account">Manage Account</string>
     <string name="btnCreateAccount">Create Account</string>
