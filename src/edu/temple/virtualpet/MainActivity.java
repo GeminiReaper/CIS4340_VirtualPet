@@ -3,6 +3,7 @@ package edu.temple.virtualpet;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +17,7 @@ public class MainActivity extends Activity {
 	ManageAccountFragment manageAccountFragment;
 	//creditPage creditPage;
 	ActionBar.Tab petTab, inventoryTab, manageAccountTab;
+	MediaPlayer mediaPlayer;
 	
 	private Handler toastHandler = new Handler(new Handler.Callback() {
 		@Override
