@@ -1,8 +1,11 @@
 package edu.temple.virtualpet;
 
+import java.io.IOException;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,7 +43,12 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 		setContentView(R.layout.activity_main);
-
+	    //AssetFileDescriptor afd = getAssets().(R.raw.background_music);
+		mediaPlayer =  MediaPlayer.create(MainActivity.this,R.raw.background_music);
+		//mediaPlayer.setDataSource(afd.getFileDescriptor());
+		mediaPlayer.setLooping(true);
+		//mediaPlayer.prepare();
+		mediaPlayer.start();
 		
 		// read the intent and toast a message. "Fed nickname item".
 		Intent intent = getIntent();
