@@ -156,6 +156,7 @@ public class InventoryFragment extends ListFragment {
 				switch (item.getItemId()) {
 				case R.id.item_feed:
 					feedPet();
+					discardItem();
 					return true;
 				case R.id.item_give:
 					giveItem();
