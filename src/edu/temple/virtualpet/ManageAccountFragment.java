@@ -26,11 +26,6 @@ public class ManageAccountFragment extends Fragment {
 	EditText userName;
 	EditText email;
 	EditText password;
-
-
-	Button btnPet;
-	Button btnManageAccount;
-	Button btnInventory;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +34,7 @@ public class ManageAccountFragment extends Fragment {
         
         /* Object Connections / declarations */
 		deleteAcct = (Button) rootView.findViewById(R.id.btnDeleteAccount);
-		createAcct = (Button) rootView.findViewById(R.id.btnCreateAccount);
+		createAcct = (Button) rootView.findViewById(R.id.btnUpdateAccount);
 		userName = (EditText) rootView.findViewById(R.id.txtUsername);
 		password = (EditText) rootView.findViewById(R.id.txtPassword);
 		email = (EditText) rootView.findViewById(R.id.txtEmail);
