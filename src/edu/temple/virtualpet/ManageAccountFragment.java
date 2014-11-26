@@ -67,6 +67,7 @@ public class ManageAccountFragment extends Fragment {
 							toastHandler.sendMessage(msg);
 
 							HttpClient httpclient = new DefaultHttpClient();
+							String userId = UserData.getInstance().getUserId();
 							String url = Constants.SERVER + "update_user.php";
 							HttpPost httppost = new HttpPost(url);
 
@@ -76,7 +77,7 @@ public class ManageAccountFragment extends Fragment {
 								//data
 								List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 								nameValuePairs.add(new BasicNameValuePair(
-										"username", userName.getText()
+										"userId", userId
 												.toString()));
 								nameValuePairs.add(new BasicNameValuePair(
 										"password", password.getText()
@@ -103,7 +104,6 @@ public class ManageAccountFragment extends Fragment {
 									String result = jObject.getString("result");
 									String message = jObject.getString("message");
 									JSONObject data = jObject.getJSONObject("data");
-									String userId = data.getString("userId");
 									String username = data.getString("username");
 									String email = data.getString("email");
 									
