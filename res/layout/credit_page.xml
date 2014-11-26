@@ -14,7 +14,7 @@
         android:text="This piece of art is brought to you by :" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/newEmailL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.00"
