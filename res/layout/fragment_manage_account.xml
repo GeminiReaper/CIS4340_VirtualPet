@@ -2,94 +2,123 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@drawable/create_test">
-    
+    android:layout_height="match_parent"
+    android:background="@drawable/create_test" >
 
-  
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/lblPassword"
+        android:layout_alignLeft="@+id/txtEmail"
+        android:ems="10"
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btnUpdateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnDeleteAccount"
+        android:layout_below="@+id/btnDeleteAccount"
+        android:layout_marginTop="31dp"
+        android:drawableLeft="@drawable/ic_pen_50"
+        android:text="@string/btnUpdateAccount" />
+
     <TextView
-                        android:id="@+id/lblPassword"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/lblEmail"
-                        android:layout_below="@+id/txtEmail"
-                        android:layout_marginTop="32dp"
-                        android:text="@string/Password"
-                        android:textSize="20dp"
-                        tools:ignore="HardcodedText" />
+        android:id="@+id/lblUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:text="@string/Username"
+        android:textSize="20dp"
+        tools:ignore="HardcodedText" />
 
-                    <TextView
-                        android:id="@+id/lblEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/lblUsername"
-                        android:layout_below="@+id/txtUsername"
-                        android:layout_marginTop="28dp"
-                        android:text="@string/Email"
-                        android:textSize="20dp"
-                        tools:ignore="HardcodedText" />
+    <Button
+        android:id="@+id/btnDeleteAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="198dp"
+        android:drawableLeft="@drawable/ic_delete_50"
+        android:text="@string/btnDeleteAccount" />
 
-                    <EditText
-                        android:id="@+id/txtPassword"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/lblPassword"
-                        android:layout_alignLeft="@+id/txtEmail"
-                        android:ems="10"
-                        android:inputType="textPassword" >
+    <TextView
+        android:id="@+id/newEmailL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/lblPassword"
+        android:layout_below="@+id/lblPassword"
+        android:layout_marginTop="46dp"
+        android:text="@string/newEmail"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="20dp" />
 
-                        <requestFocus />
-                    </EditText>
+    <TextView
+        android:id="@+id/newPasswordL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/newEmailL"
+        android:layout_below="@+id/newEmailL"
+        android:layout_marginTop="25dp"
+        android:text="@string/newPassword"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="20dp" />
 
-                    <EditText
-                        android:id="@+id/txtEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/lblEmail"
-                        android:layout_alignLeft="@+id/txtUsername"
-                        android:ems="10"
-						android:inputType="textEmailAddress" />
-                    
-                    <TextView
-                        android:id="@+id/lblUsername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="108dp"
-                        android:layout_marginTop="79dp"
-                        android:text="@string/Username"
-                        android:textSize="20dp"
-                        tools:ignore="HardcodedText" />
+    <EditText
+        android:id="@+id/newPasswordTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newPasswordL"
+        android:layout_alignBottom="@+id/newPasswordL"
+        android:layout_alignLeft="@+id/txtPassword"
+        android:ems="10"
+        android:inputType="textPassword" />
 
-                    <EditText
-                        android:id="@+id/txtUsername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/lblUsername"
-                        android:layout_marginLeft="23dp"
-                        android:layout_toRightOf="@+id/lblUsername"
-                        android:ems="10"
-                        android:inputType="text" />
+    <EditText
+        android:id="@+id/newEmailTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newPasswordTF"
+        android:layout_alignTop="@+id/newEmailL"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
 
-                    <Button
-                        android:id="@+id/btnDeleteAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtPassword"
-                        android:layout_marginTop="39dp"
-                        android:layout_toRightOf="@+id/lblPassword"
-                        android:drawableLeft="@drawable/ic_delete_50"
-                        android:text="@string/btnDeleteAccount" />
-				
-                           <Button
-                               android:id="@+id/btnUpdateAccount"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:layout_alignLeft="@+id/btnDeleteAccount"
-                               android:layout_below="@+id/btnDeleteAccount"
-                               android:layout_marginTop="31dp"
-                               android:drawableLeft="@drawable/ic_pen_50"
-                               android:text="@string/btnUpdateAccount" />
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblUsername"
+        android:layout_alignTop="@+id/currentEmailL"
+        android:layout_marginLeft="20dp"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/currentEmailL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtPassword"
+        android:layout_marginBottom="13dp"
+        android:layout_toLeftOf="@+id/btnDeleteAccount"
+        android:text="@string/currentEmail"
+        android:textSize="20dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/lblPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblUsername"
+        android:layout_marginTop="88dp"
+        android:layout_toLeftOf="@+id/btnDeleteAccount"
+        android:text="@string/currentPassword"
+        android:textSize="20dp"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>
