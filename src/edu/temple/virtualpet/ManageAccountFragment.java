@@ -57,16 +57,16 @@ public class ManageAccountFragment extends Fragment {
 
 					public void run() {
 						String noNetwork = "No Available Network";
-						Message msg = Message.obtain();
+						
 
 						if(!(Utility.isNetworkAvailable(getActivity()))) {
 
 							/* No Network Message to User */
+							Message msg = Message.obtain();
 							msg.obj = noNetwork;
 							toastHandler.sendMessage(msg);
 
 							HttpClient httpclient = new DefaultHttpClient();
-							String userId = UserData.getInstance().getUserId();
 							String url = Constants.SERVER + "update_user.php";
 							HttpPost httppost = new HttpPost(url);
 
@@ -75,6 +75,9 @@ public class ManageAccountFragment extends Fragment {
 
 								//data
 								List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+								nameValuePairs.add(new BasicNameValuePair(
+										"username", userName.getText()
+												.toString()));
 								nameValuePairs.add(new BasicNameValuePair(
 										"password", password.getText()
 										.toString()));
@@ -96,14 +99,18 @@ public class ManageAccountFragment extends Fragment {
 
 								try {
 									jObject = new JSONObject(responseJSON);
-									String result = jObject
-											.getString("result");
-									String message = jObject
-											.getString("message");
+									Log.i("JSON: ", responseJSON);
+									String result = jObject.getString("result");
+									String message = jObject.getString("message");
+									JSONObject data = jObject.getJSONObject("data");
+									String userId = data.getString("userId");
+									String username = data.getString("username");
+									String email = data.getString("email");
+									
 									/* Check if the JSON string result returned success or failed */
 									if (result.equals("success")) {
 										Message resultMsg = Message.obtain();
-										resultMsg.obj = result + ": " + message;
+										resultMsg.obj = "Account info changed successfully";
 										toastHandler.sendMessage(resultMsg);
 										
 										Log.i("Result: ", "Success");
@@ -111,7 +118,7 @@ public class ManageAccountFragment extends Fragment {
 									} else if(result.equals("error")) {
 
 										Message resultMsg = Message.obtain();
-										resultMsg.obj = result + ": " + message;
+										resultMsg.obj = "Error Change wasn't made";
 										toastHandler.sendMessage(resultMsg);
 										
 										Log.i("Result: ", "Error");
@@ -152,11 +159,9 @@ public class ManageAccountFragment extends Fragment {
 		public boolean handleMessage(Message message) {
 			Toast toast = Toast.makeText(getActivity(), (String) message.obj,
 					Toast.LENGTH_LONG);
-
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.show();
 			return false;
 		}
 	});
-
-
 }
