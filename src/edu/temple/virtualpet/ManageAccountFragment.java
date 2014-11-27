@@ -110,11 +110,12 @@ public class ManageAccountFragment extends Fragment {
 									jObject = new JSONObject(responseJSON);
 									Log.i("JSON: ", responseJSON);
 									String result = jObject.getString("result");
+									String message = jObject.getString("message");
 
 									/* Check if the JSON string result returned success or failed */
 									if (result.equals("success")) {
 										Message resultMsg = Message.obtain();
-										resultMsg.obj = "Account info changed successfully";
+										resultMsg.obj = "Result: " + message;
 										toastHandler.sendMessage(resultMsg);
 
 										Log.i("Result: ", result);
@@ -122,7 +123,7 @@ public class ManageAccountFragment extends Fragment {
 									} else if(result.equals("error")) {
 
 										Message resultMsg = Message.obtain();
-										resultMsg.obj = "Error Change wasn't made";
+										resultMsg.obj = "Result: " + message;
 										toastHandler.sendMessage(resultMsg);
 
 										Log.i("Result: ", result);
@@ -156,13 +157,95 @@ public class ManageAccountFragment extends Fragment {
 
 			}//end onClick
 		});//end of createOnClickListener
+		
+		deleteAcct.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Thread deleteAcct = new Thread() {
+					public void run() {
+						if(Utility.isNetworkAvailable(getActivity())) {
+
+							HttpClient httpclient = new DefaultHttpClient();
+							String userId = UserData.getInstance().getUserId();
+							String url = Constants.SERVER + "delete_user.php";
+							HttpPost httppost = new HttpPost(url);
+							
+							try {
+
+								//data
+								List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+								nameValuePairs.add(new BasicNameValuePair(
+										"userId", userId
+												.toString()));
+								nameValuePairs.add(new BasicNameValuePair(
+										"password", newPasswordTF.getText()
+										.toString()));
+								nameValuePairs
+								.add(new BasicNameValuePair(
+										"email", newEmailTF.getText()
+										.toString()));
+								httppost.setEntity(new UrlEncodedFormEntity(
+										nameValuePairs));
+
+								// Execute HTTP Post Request
+								HttpResponse response = httpclient
+										.execute(httppost);
+
+								String responseJSON = EntityUtils
+										.toString(response.getEntity());
+
+								JSONObject jObject;
+								
+
+								try {
+									jObject = new JSONObject(responseJSON);
+									Log.i("JSON: ", responseJSON);
+									String result = jObject.getString("result");
+									String message = jObject.getString("message");
+
+									/* Check if the JSON string result returned success or failed */
+									if (result.equals("success")) {
+										Message resultMsg = Message.obtain();
+										resultMsg.obj = "Result: " + message;
+										toastHandler.sendMessage(resultMsg);
+
+										Log.i("Result: ", result);
+
+									} else if(result.equals("error")) {
+
+										Message resultMsg = Message.obtain();
+										resultMsg.obj = "Result: " + message;
+										toastHandler.sendMessage(resultMsg);
+
+										Log.i("Result: ", result);
+
+									}
+								} catch(JSONException e) {
+									e.printStackTrace();
+								}
+								
+								clear.post(run);
+								
+							} catch (Exception e) {
+								e.printStackTrace();;
+							} 
+							
+							
+						}
+					}
+				};//end of deleteAcct Thread
+				deleteAcct.start();
+			}//end of delete's onClick
+		});//end of delete Button ActionListener
 
 
 
 
 
 		return rootView;
-	}
+	}//end of onCreateView
 
 	
 	
