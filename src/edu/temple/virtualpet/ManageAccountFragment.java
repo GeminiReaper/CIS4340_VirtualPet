@@ -53,16 +53,16 @@ public class ManageAccountFragment extends Fragment {
 		newPasswordTF = (EditText) rootView.findViewById(R.id.newPasswordTF);
 
 		userName.setText(UserData.getInstance().getUsername());
-		
+
 		final Handler clear = new Handler();
-		
+
 		final Runnable run = new Runnable() {
 			public void run() {
 				newEmailTF.setText("");
 				newPasswordTF.setText("");
 			}
 		};
-	
+
 
 		updateAcct.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -71,7 +71,7 @@ public class ManageAccountFragment extends Fragment {
 				Thread updateUserInfo = new Thread() {
 
 					public void run() {
-						
+
 						if(Utility.isNetworkAvailable(getActivity())) {
 
 							HttpClient httpclient = new DefaultHttpClient();
@@ -85,7 +85,7 @@ public class ManageAccountFragment extends Fragment {
 								List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 								nameValuePairs.add(new BasicNameValuePair(
 										"userId", userId
-												.toString()));
+										.toString()));
 								nameValuePairs.add(new BasicNameValuePair(
 										"password", newPasswordTF.getText()
 										.toString()));
@@ -104,7 +104,7 @@ public class ManageAccountFragment extends Fragment {
 										.toString(response.getEntity());
 
 								JSONObject jObject;
-								
+
 
 								try {
 									jObject = new JSONObject(responseJSON);
@@ -132,13 +132,13 @@ public class ManageAccountFragment extends Fragment {
 								} catch(JSONException e) {
 									e.printStackTrace();
 								}
-								
+
 								clear.post(run);
-								
+
 							} catch (Exception e) {
 								e.printStackTrace();;
 							} 
-	
+
 						}//end if 
 						else {
 							String noNetwork = "No Available Network";
@@ -157,12 +157,12 @@ public class ManageAccountFragment extends Fragment {
 
 			}//end onClick
 		});//end of createOnClickListener
-		
+
 		deleteAcct.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+
 				Thread deleteAcct = new Thread() {
 					public void run() {
 						if(Utility.isNetworkAvailable(getActivity())) {
@@ -171,24 +171,14 @@ public class ManageAccountFragment extends Fragment {
 							String userId = UserData.getInstance().getUserId();
 							String url = Constants.SERVER + "delete_user.php";
 							HttpPost httppost = new HttpPost(url);
-							
+
 							try {
 
 								//data
 								List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 								nameValuePairs.add(new BasicNameValuePair(
 										"userId", userId
-												.toString()));
-								nameValuePairs.add(new BasicNameValuePair(
-										"password", newPasswordTF.getText()
 										.toString()));
-								nameValuePairs
-								.add(new BasicNameValuePair(
-										"email", newEmailTF.getText()
-										.toString()));
-								httppost.setEntity(new UrlEncodedFormEntity(
-										nameValuePairs));
-
 								// Execute HTTP Post Request
 								HttpResponse response = httpclient
 										.execute(httppost);
@@ -197,7 +187,7 @@ public class ManageAccountFragment extends Fragment {
 										.toString(response.getEntity());
 
 								JSONObject jObject;
-								
+
 
 								try {
 									jObject = new JSONObject(responseJSON);
@@ -225,15 +215,24 @@ public class ManageAccountFragment extends Fragment {
 								} catch(JSONException e) {
 									e.printStackTrace();
 								}
-								
+
 								clear.post(run);
-								
+
 							} catch (Exception e) {
 								e.printStackTrace();;
 							} 
-							
+
 							Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
 							startActivity(loginIntent);
+						}//end if
+
+						else {
+							String noNetwork = "No Available Network";
+							Message msg = Message.obtain();
+
+							/* No Network Message to User */
+							msg.obj = noNetwork;
+							toastHandler.sendMessage(msg);
 						}
 					}
 				};//end of deleteAcct Thread
@@ -248,8 +247,8 @@ public class ManageAccountFragment extends Fragment {
 		return rootView;
 	}//end of onCreateView
 
-	
-	
+
+
 	private Handler toastHandler = new Handler(new Handler.Callback() {
 		@Override
 		public boolean handleMessage(Message message) {
