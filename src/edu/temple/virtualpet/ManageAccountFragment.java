@@ -27,15 +27,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ManageAccountFragment extends Fragment {
 
 	Button deleteAcct;
-	Button createAcct;
-	EditText userName;
-	EditText email;
-	EditText password;
+	Button updateAcct;
+	TextView userName;
+	EditText currentEmail;
+	EditText currentPassword;
+	EditText newEmailTF;
+	EditText newPasswordTF;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,33 +47,37 @@ public class ManageAccountFragment extends Fragment {
 
 		/* Object Connections / declarations */
 		deleteAcct = (Button) rootView.findViewById(R.id.btnDeleteAccount);
-		createAcct = (Button) rootView.findViewById(R.id.btnUpdateAccount);
-		userName = (EditText) rootView.findViewById(R.id.txtUsername);
-		password = (EditText) rootView.findViewById(R.id.txtPassword);
-		email = (EditText) rootView.findViewById(R.id.txtEmail);
+		updateAcct = (Button) rootView.findViewById(R.id.btnUpdateAccount);
+		userName = (TextView) rootView.findViewById(R.id.lblUsername);
+		newEmailTF = (EditText) rootView.findViewById(R.id.newEmailTF);
+		newPasswordTF = (EditText) rootView.findViewById(R.id.newPasswordTF);
 
-		createAcct.setOnClickListener(new View.OnClickListener() {
+		userName.setText(UserData.getInstance().getUsername());
+		
+		final Handler clear = new Handler();
+		
+		final Runnable run = new Runnable() {
+			public void run() {
+				newEmailTF.setText("");
+				newPasswordTF.setText("");
+			}
+		};
+	
+
+		updateAcct.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
 				Thread updateUserInfo = new Thread() {
 
 					public void run() {
-						String noNetwork = "No Available Network";
 						
-
-						if(!(Utility.isNetworkAvailable(getActivity()))) {
-
-							/* No Network Message to User */
-							Message msg = Message.obtain();
-							msg.obj = noNetwork;
-							toastHandler.sendMessage(msg);
+						if(Utility.isNetworkAvailable(getActivity())) {
 
 							HttpClient httpclient = new DefaultHttpClient();
 							String userId = UserData.getInstance().getUserId();
 							String url = Constants.SERVER + "update_user.php";
 							HttpPost httppost = new HttpPost(url);
-
 
 							try {
 
@@ -80,11 +87,11 @@ public class ManageAccountFragment extends Fragment {
 										"userId", userId
 												.toString()));
 								nameValuePairs.add(new BasicNameValuePair(
-										"password", password.getText()
+										"password", newPasswordTF.getText()
 										.toString()));
 								nameValuePairs
 								.add(new BasicNameValuePair(
-										"email", email.getText()
+										"email", newEmailTF.getText()
 										.toString()));
 								httppost.setEntity(new UrlEncodedFormEntity(
 										nameValuePairs));
@@ -97,53 +104,56 @@ public class ManageAccountFragment extends Fragment {
 										.toString(response.getEntity());
 
 								JSONObject jObject;
+								
 
 								try {
 									jObject = new JSONObject(responseJSON);
 									Log.i("JSON: ", responseJSON);
 									String result = jObject.getString("result");
-									String message = jObject.getString("message");
-									JSONObject data = jObject.getJSONObject("data");
-									String username = data.getString("username");
-									String email = data.getString("email");
-									
+
 									/* Check if the JSON string result returned success or failed */
 									if (result.equals("success")) {
 										Message resultMsg = Message.obtain();
 										resultMsg.obj = "Account info changed successfully";
 										toastHandler.sendMessage(resultMsg);
-										
-										Log.i("Result: ", "Success");
+
+										Log.i("Result: ", result);
 
 									} else if(result.equals("error")) {
 
 										Message resultMsg = Message.obtain();
 										resultMsg.obj = "Error Change wasn't made";
 										toastHandler.sendMessage(resultMsg);
-										
-										Log.i("Result: ", "Error");
+
+										Log.i("Result: ", result);
 
 									}
 								} catch(JSONException e) {
 									e.printStackTrace();
 								}
-
-
-
-
+								
+								clear.post(run);
+								
 							} catch (Exception e) {
 								e.printStackTrace();;
 							} 
-
-
-
-
+	
 						}//end if 
+						else {
+							String noNetwork = "No Available Network";
+							Message msg = Message.obtain();
+
+							/* No Network Message to User */
+							msg.obj = noNetwork;
+							toastHandler.sendMessage(msg);
+						}
 
 
 					}//end run	
 				};//end udateUserInfo Thread
+
 				updateUserInfo.start();
+
 			}//end onClick
 		});//end of createOnClickListener
 
@@ -154,6 +164,8 @@ public class ManageAccountFragment extends Fragment {
 		return rootView;
 	}
 
+	
+	
 	private Handler toastHandler = new Handler(new Handler.Callback() {
 		@Override
 		public boolean handleMessage(Message message) {
