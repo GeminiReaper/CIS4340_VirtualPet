@@ -232,7 +232,8 @@ public class ManageAccountFragment extends Fragment {
 								e.printStackTrace();;
 							} 
 							
-							
+							Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+							startActivity(loginIntent);
 						}
 					}
 				};//end of deleteAcct Thread
