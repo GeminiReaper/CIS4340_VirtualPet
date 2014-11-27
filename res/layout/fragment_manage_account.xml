@@ -14,7 +14,9 @@
         android:ems="10"
         android:inputType="textPassword" >
 
-        <requestFocus />
+        <requestFocus
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </EditText>
 
     <Button
@@ -52,9 +54,9 @@
         android:id="@+id/newEmailL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/lblPassword"
-        android:layout_below="@+id/lblPassword"
+        android:layout_below="@+id/lblUsername"
         android:layout_marginTop="46dp"
+        android:layout_toLeftOf="@+id/btnDeleteAccount"
         android:text="@string/newEmail"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="20dp" />
@@ -76,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/newPasswordL"
         android:layout_alignBottom="@+id/newPasswordL"
-        android:layout_alignLeft="@+id/txtPassword"
+        android:layout_alignLeft="@+id/lblUsername"
         android:ems="10"
         android:inputType="textPassword" />
 
@@ -99,16 +101,7 @@
         android:ems="10"
         android:inputType="textEmailAddress" />
 
-    <TextView
-        android:id="@+id/currentEmailL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtPassword"
-        android:layout_marginBottom="13dp"
-        android:layout_toLeftOf="@+id/btnDeleteAccount"
-        android:text="@string/currentEmail"
-        android:textSize="20dp"
-        tools:ignore="HardcodedText" />
+
 
     <TextView
         android:id="@+id/lblPassword"
@@ -120,5 +113,11 @@
         android:text="@string/currentPassword"
         android:textSize="20dp"
         tools:ignore="HardcodedText" />
+
+    <EditText>
+    </EditText>
+
+    <TextView>
+    </TextView>
 
 </RelativeLayout>
